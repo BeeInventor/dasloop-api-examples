@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {},
   "author": "BeeInventor",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "mqtt": "^4.3.7"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "private": true
 }
