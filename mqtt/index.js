@@ -79,6 +79,10 @@ function onMqttConnect() {
     console.log(new Date().toISOString() + " MQTT connected, clientId " + clientId);
 }
 
+function onMqttDisconnect(packet) {
+    console.log(new Date().toISOString() + " received MQTT disconnect package " + packet);
+}
+
 function onMqttError(err) {
     console.error(new Date().toISOString() + "MQTT error: " + err);
 }
@@ -108,6 +112,7 @@ async function connectMqtt() {
     });
     mqttClient.on("error", onMqttError);
     mqttClient.on("connect", onMqttConnect);
+    mqttClient.on("disconnect", onMqttDisconnect);
     mqttClient.on("message", onMqttMessage);
     mqttClient.on("close", onMqttClose)
     mqttClient.subscribe("v1/json/projects/" + project.id + "/device_updates");
