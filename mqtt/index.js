@@ -43,9 +43,9 @@ async function getToken() {
                 token,
             }
         }
-        console.error(new Date().toISOString() + "getToken() error: " + await res.text());
+        console.error(new Date().toISOString() + " getToken() error: " + await res.text());
     } catch (err) {
-        console.error(new Date().toISOString() + "getToken() error: " + err);
+        console.error(new Date().toISOString() + " getToken() error: " + err);
     }
 
     // retry after a delay
@@ -65,9 +65,9 @@ async function getProjects(token) {
             return res.json();
         }
 
-        console.error(new Date().toISOString() + "getProjects() error: " + await res.text());
+        console.error(new Date().toISOString() + " getProjects() error: " + await res.text());
     } catch (err) {
-        console.error(new Date().toISOString() + "getProjects() error: " + err);
+        console.error(new Date().toISOString() + " getProjects() error: " + err);
     }
 
     // retry after a delay
@@ -84,7 +84,7 @@ function onMqttDisconnect(packet) {
 }
 
 function onMqttError(err) {
-    console.error(new Date().toISOString() + "MQTT error: " + err);
+    console.error(new Date().toISOString() + " MQTT error: " + err);
 }
 
 function onMqttMessage(topic, message, packet) {
