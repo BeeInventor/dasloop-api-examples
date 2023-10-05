@@ -115,7 +115,9 @@ async function connectMqtt() {
     mqttClient.on("disconnect", onMqttDisconnect);
     mqttClient.on("message", onMqttMessage);
     mqttClient.on("close", onMqttClose)
-    mqttClient.subscribe("v1/json/projects/" + project.id + "/device_updates");
+
+    const topic = "v1/json/projects/" + project.id + "/device_updates";
+    mqttClient.subscribe(topic, { qos: 1 });
 }
 
 connectMqtt();
