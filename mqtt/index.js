@@ -1,4 +1,5 @@
 const mqtt = require("mqtt");
+const fs = require("fs");
 
 const username = process.env.DASLOOP_USERNAME;
 const password = process.env.DASLOOP_PASSWORD;
@@ -89,6 +90,16 @@ function onMqttError(err) {
 
 function onMqttMessage(topic, message, packet) {
     console.log(new Date().toISOString() + " Received msg of topic " + topic);
+    const updates = JSON.parse(message);
+    for (update of updates) {
+        console.log(Object.keys(update).join(", "));
+        const alert = update.alert;
+        if (alert == null)
+            continue;
+        const alertPrinted = JSON.stringify(alert, null, 2);
+        console.log(alertPrinted);
+        fs.writeFileSync("alerts/" + alert.date + "_" + alert.device + ".json", alertPrinted);
+    }
 }
 
 function onMqttClose() {
